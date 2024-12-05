@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="menu_title_1">Tasks</string>
+    <string name="title_toolbar">Toolbar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_home">Home</string>
+    <string name="label_about">About\n</string>
+    <string name="menu_title_2">About\n</string>
+</resources>
