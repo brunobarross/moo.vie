@@ -8,32 +8,7 @@
     tools:context=".MainActivity"
     tools:openDrawer="start">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.AppBarLayout
-            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                android:elevation="0dp"
-                app:navigationIcon="@drawable/baseline_menu_24"
-                app:title="@string/title_toolbar" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <include layout="@layout/content_main" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <include layout="@layout/app_bar_main" />
 
 
     <com.google.android.material.navigation.NavigationView
