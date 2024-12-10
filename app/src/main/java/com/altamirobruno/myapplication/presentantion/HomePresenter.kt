@@ -4,7 +4,7 @@ import android.util.Log
 import com.altamirobruno.myapplication.HomeFragment
 import com.altamirobruno.myapplication.data.ListMoviesCallback
 import com.altamirobruno.myapplication.data.MovieRemoteDataSource
-import com.altamirobruno.myapplication.model.Movie
+import com.altamirobruno.myapplication.model.MovieResponse
 
 
 class HomePresenter(
@@ -16,9 +16,13 @@ class HomePresenter(
         dataSource.getMovies(this)
     }
 
-    override fun onSuccess(response: List<Movie>) {
-        val movies = response
-        view.showMovies(movies)
+    override fun onSuccess(response: MovieResponse) {
+        val movies = response.results
+        val posterUrl = "https://image.tmdb.org/t/p/original/"
+        val moviesWithCover = movies.map { movie ->
+            movie.copy(poster_path = "$posterUrl${movie.poster_path}")
+        }
+        view.showMovies(moviesWithCover)
     }
 
     override fun onError(response: String) {
