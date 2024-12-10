@@ -1,10 +1,11 @@
 package com.altamirobruno.myapplication.presentantion
 
 import android.util.Log
+import com.altamirobruno.myapplication.HomeFragment
 import com.altamirobruno.myapplication.data.ListMoviesCallback
 import com.altamirobruno.myapplication.data.MovieRemoteDataSource
 import com.altamirobruno.myapplication.model.Movie
-import com.altamirobruno.myapplication.view.HomeFragment
+
 
 class HomePresenter(
     private val view: HomeFragment,
@@ -16,7 +17,7 @@ class HomePresenter(
     }
 
     override fun onSuccess(response: List<Movie>) {
-        val movies = response.map { movie -> movie }
+        val movies = response
         view.showMovies(movies)
     }
 
