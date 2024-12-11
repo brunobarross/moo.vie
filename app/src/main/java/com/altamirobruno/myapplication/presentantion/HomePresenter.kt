@@ -4,25 +4,38 @@ import android.util.Log
 import com.altamirobruno.myapplication.HomeFragment
 import com.altamirobruno.myapplication.data.ListMoviesCallback
 import com.altamirobruno.myapplication.data.MovieRemoteDataSource
+import com.altamirobruno.myapplication.model.Category
 import com.altamirobruno.myapplication.model.MovieResponse
 
 
 class HomePresenter(
     private val view: HomeFragment,
-    private val dataSource: MovieRemoteDataSource = MovieRemoteDataSource()
-) : ListMoviesCallback {
+    private val dataSource: MovieRemoteDataSource = MovieRemoteDataSource(),
+
+    ) : ListMoviesCallback {
+    var categories = mutableListOf<Category>()
 
     fun findAllMovies() {
         dataSource.getMovies(this)
     }
 
+
+
     override fun onSuccess(response: MovieResponse) {
+
         val movies = response.results
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         val moviesWithCover = movies.map { movie ->
             movie.copy(poster_path = "$posterUrl${movie.poster_path}")
         }
         view.showMovies(moviesWithCover)
+        categories.add(
+            Category(
+                id = 1,
+                name = "Em alta",
+                movies = moviesWithCoverim
+            )
+        )
     }
 
     override fun onError(response: String) {

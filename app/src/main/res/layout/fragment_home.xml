@@ -7,10 +7,15 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home"
+        android:id="@+id/rv_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:itemCount="10"
-        tools:listitem="@layout/movie_item" />
+        android:layout_height="150dp"
+        tools:itemCount="5"
+        tools:listitem="@layout/movie_item"
+
+
+        />
+
+
 
 </FrameLayout>

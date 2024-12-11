@@ -1,54 +1,45 @@
 package com.altamirobruno.myapplication.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.altamirobruno.myapplication.HomeFragment
 import com.altamirobruno.myapplication.R
-import com.altamirobruno.myapplication.model.Movie
-import com.bumptech.glide.Glide
+import com.altamirobruno.myapplication.model.Category
 
 
 class CategoryAdapter(
-    private val movies: List<Movie>,
+    private val categories: List<Category>,
     private val fragment: Fragment
-) : RecyclerView.Adapter<CategoryAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
-        return MovieViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
+        return CategoryViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+        val category = categories[position]
+        holder.bind(category)
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return categories.size
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = movies[position]
-        holder.bind(movie)
+    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(category: Category) {
+            val rv_movie = itemView.findViewById<RecyclerView>(R.id.rv_movie)
+            val title = itemView.findViewById<TextView>(R.id.title_category)
+            rv_movie.layoutManager =
+                LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+            rv_movie.adapter = MovieAdapter(category.movies, fragment)
 
-    }
-
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(movie: Movie) {
-            val movieTitle: TextView = itemView.findViewById(R.id.movie_title)
-            val movieCover: ImageView = itemView.findViewById(R.id.movie_cover)
-            val posterUrl = "https://image.tmdb.org/t/p/original/${movie.poster_path}"
-            movieTitle.text = movie.title
-
-
-            Glide
-                .with(fragment)
-                .load(movie.poster_path)
-                .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(movieCover);
+            title.text = category.name
 
 
         }
