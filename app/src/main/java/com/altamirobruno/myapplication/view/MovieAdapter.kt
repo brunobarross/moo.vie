@@ -34,6 +34,7 @@ class MovieAdapter(
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
+
             val movieTitle: TextView = itemView.findViewById(R.id.movie_title)
             val movieCover: ImageView = itemView.findViewById(R.id.movie_cover)
             val posterUrl = "https://image.tmdb.org/t/p/original/${movie.poster_path}"
