@@ -35,12 +35,6 @@ class MovieAdapter(
 
     }
 
-    fun openFragment(view: View, movie: Movie) {
-        view.setOnClickListener {
-            Log.d("sss", movie.id.toString())
-        }
-
-    }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
@@ -56,9 +50,11 @@ class MovieAdapter(
                 .centerCrop()
                 .placeholder(R.drawable.movie_cover_placeholder)
                 .into(movieCover);
-            openFragment(itemView, movie)
-            val bundle = Bundle()
-            fragment.findNavController().navigate(R.id.action_nav_home_to_nav_movie)
+
+            itemView.setOnClickListener {
+                val bundle = Bundle()
+                fragment.findNavController().navigate(R.id.action_nav_home_to_nav_movie)
+            }
         }
 
     }
