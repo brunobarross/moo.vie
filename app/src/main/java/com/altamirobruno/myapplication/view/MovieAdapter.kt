@@ -1,5 +1,6 @@
 package com.altamirobruno.myapplication.view
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.altamirobruno.myapplication.R
 import com.altamirobruno.myapplication.model.Movie
@@ -55,7 +57,8 @@ class MovieAdapter(
                 .placeholder(R.drawable.movie_cover_placeholder)
                 .into(movieCover);
             openFragment(itemView, movie)
-
+            val bundle = Bundle()
+            fragment.findNavController().navigate(R.id.action_nav_home_to_nav_movie)
         }
 
     }
