@@ -52,7 +52,7 @@ class MovieAdapter(
                 .with(fragment)
                 .load(movie.poster_path)
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.movie_cover_placeholder)
                 .into(movieCover);
             openFragment(itemView, movie)
 
