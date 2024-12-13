@@ -46,6 +46,7 @@ class HomePresenter(
 
                     }
                     view.showMovies()
+                    println("RODOU")
 
 
                 }

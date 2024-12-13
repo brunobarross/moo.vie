@@ -1,5 +1,6 @@
 package com.altamirobruno.myapplication.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,13 @@ class MovieAdapter(
 
     }
 
+    fun openFragment(view: View, movie: Movie) {
+        view.setOnClickListener {
+            Log.d("sss", movie.id.toString())
+        }
+
+    }
+
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
 
@@ -46,7 +54,7 @@ class MovieAdapter(
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(movieCover);
-
+            openFragment(itemView, movie)
 
         }
 
