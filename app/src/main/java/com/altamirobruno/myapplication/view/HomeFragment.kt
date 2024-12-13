@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         val rv_category: RecyclerView = view.findViewById(R.id.rv_category)
         rv_category.layoutManager = LinearLayoutManager(requireContext())
         adapter = CategoryAdapter(presenter.categories, this)
-        presenter.loadingCategries()
+        presenter.loadingCategories()
         rv_category.adapter = adapter
         adapter.notifyDataSetChanged()
     }

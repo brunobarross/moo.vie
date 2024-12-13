@@ -16,15 +16,10 @@ import kotlinx.coroutines.withContext
 class HomePresenter(
     private val view: HomeFragment,
     private val dataSource: MovieRemoteDataSource = MovieRemoteDataSource(),
-) : ListMoviesCallback {
+) {
     var categories = mutableListOf<Category>()
 
-    suspend fun findMovies() {
-
-    }
-
-
-    fun loadingCategries() {
+    fun loadingCategories() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val moviesPopular = dataSource.getMovies("movie/popular").getOrNull()
@@ -35,7 +30,7 @@ class HomePresenter(
                             Category(
                                 id = 1,
                                 name = "Em alta",
-                                movies = inserCoverInMovie(moviesPopular)
+                                movies = inserCoverMovies(moviesPopular)
                             )
                         )
 
@@ -45,7 +40,7 @@ class HomePresenter(
                             Category(
                                 id = 2,
                                 name = "Mais bem avaliados",
-                                movies = inserCoverInMovie(moviesTopRated)
+                                movies = inserCoverMovies(moviesTopRated)
                             )
                         )
 
@@ -57,7 +52,7 @@ class HomePresenter(
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    e.message?.let { onError(it) }
+                    e.message?.let { Log.d("Erro", it.toString()) }
                 }
             }
 
@@ -66,24 +61,11 @@ class HomePresenter(
 
     }
 
-    fun inserCoverInMovie(moviesList: List<Movie>): List<Movie> {
+    fun inserCoverMovies(moviesList: List<Movie>): List<Movie> {
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         return moviesList.map { movie -> movie.copy(poster_path = "$posterUrl${movie.poster_path}") }
 
     }
 
-
-    override fun onSuccess(response: MovieResponse) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onError(response: String) {
-        Log.d("Erro", response.toString())
-    }
-
-
-    override fun onComplete() {
-        Log.d("Completou", "Finalizado")
-    }
 
 }
