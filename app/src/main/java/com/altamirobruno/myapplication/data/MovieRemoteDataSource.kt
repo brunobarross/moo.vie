@@ -48,4 +48,24 @@ class MovieRemoteDataSource {
         }
 
     }
+
+    suspend fun getMovie(id: Int): Result<Movie> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = HTTPClient.retrofit().create(TMDBApi::class.java).getMovie(id)
+                if (response.isSuccessful) {
+                    val movie = response.body()
+                    Result.success(movie)
+                } else {
+                    val error = response.errorBody()?.string() ?: "Erro desconhecido"
+                    Result.failure(Exception(error))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            } as Result<Movie>
+
+        }
+
+    }
+
 }

@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_movie"
-        android:name="com.altamirobruno.myapplication.MovieFragment"
+        android:name="com.altamirobruno.myapplication.view.MovieFragment"
 
         tools:layout="@layout/fragment_movie"
 

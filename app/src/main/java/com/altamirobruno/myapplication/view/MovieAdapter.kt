@@ -1,7 +1,6 @@
 package com.altamirobruno.myapplication.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +43,7 @@ class MovieAdapter(
             val posterUrl = "https://image.tmdb.org/t/p/original/${movie.poster_path}"
             movieTitle.text = movie.title
 
+
             Glide
                 .with(fragment)
                 .load(movie.poster_path)
@@ -53,7 +53,10 @@ class MovieAdapter(
 
             itemView.setOnClickListener {
                 val bundle = Bundle()
-                fragment.findNavController().navigate(R.id.action_nav_home_to_nav_movie)
+                bundle.putInt("id", movie.id)
+                fragment.findNavController().navigate(
+                    R.id.action_nav_home_to_nav_movie, bundle
+                )
             }
         }
 
