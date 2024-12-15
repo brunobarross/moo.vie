@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.altamirobruno.myapplication.R
 import com.altamirobruno.myapplication.model.Movie
@@ -19,6 +20,7 @@ class MovieFragment : Fragment(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = MoviePresenter(this)
+
 
 
     }
@@ -36,6 +38,7 @@ class MovieFragment : Fragment(
         super.onViewCreated(view, savedInstanceState)
         val id: Int = arguments?.getInt("id") ?: 0
         presenter.loadingMovie(id)
+
     }
 
     fun showMovieDetail(movie: Movie) {
@@ -43,6 +46,7 @@ class MovieFragment : Fragment(
         val movieTitle: TextView? = view?.findViewById(R.id.movie_detail_title)
         val movieDescrition: TextView? = view?.findViewById(R.id.movie_detail_description)
         if (movieCover != null) {
+
             Glide
                 .with(this)
                 .load(movie.poster_path)
@@ -51,9 +55,20 @@ class MovieFragment : Fragment(
                 .into(movieCover)
         };
         if (movieTitle !== null) movieTitle.text = movie.title
-        if(movieDescrition !== null) movieDescrition.text = movie.overview
+        if (movieDescrition !== null) movieDescrition.text = movie.overview
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+        
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as? AppCompatActivity)?.supportActionBar?.show()
     }
 
 

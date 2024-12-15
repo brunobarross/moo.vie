@@ -17,7 +17,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/darker_gray"
+            android:background="@color/blue_prime"
             app:navigationIcon="@drawable/baseline_menu_24"
             app:title="@string/title_toolbar" />
 

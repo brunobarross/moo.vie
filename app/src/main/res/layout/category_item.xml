@@ -12,7 +12,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="16dp"
         tools:text="Category"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
