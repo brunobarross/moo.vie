@@ -27,6 +27,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/movie_cover_placeholder" />
+
     </androidx.cardview.widget.CardView>
 
 

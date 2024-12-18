@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.altamirobruno.myapplication.databinding.FragmentHomeBinding
 import com.altamirobruno.myapplication.presentantion.HomePresenter
 import com.altamirobruno.myapplication.view.CategoryAdapter
 
@@ -15,6 +16,8 @@ import com.altamirobruno.myapplication.view.CategoryAdapter
 class HomeFragment : Fragment() {
     private lateinit var presenter: HomePresenter
     private lateinit var adapter: CategoryAdapter
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +29,15 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rv_category: RecyclerView = view.findViewById(R.id.rv_category)
+        val rv_category: RecyclerView = binding.rvCategory
         rv_category.layoutManager = LinearLayoutManager(requireContext())
         adapter = CategoryAdapter(presenter.categories, this)
 
@@ -50,8 +56,6 @@ class HomeFragment : Fragment() {
         Log.d("chegou", presenter.categories.toString())
 
     }
-
-
 
 
 }

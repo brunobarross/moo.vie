@@ -13,11 +13,20 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/movie_image"
+<!--        <ImageView-->
+<!--            android:id="@+id/movie_image"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            app:layout_constraintDimensionRatio="16:9"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <VideoView
+            android:id="@+id/movie_video"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
+            
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +39,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_image"
+            app:layout_constraintTop_toBottomOf="@id/movie_video"
             tools:text="Title" />
 
         <TextView

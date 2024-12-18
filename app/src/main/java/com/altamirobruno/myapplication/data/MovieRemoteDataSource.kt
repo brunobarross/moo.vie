@@ -2,6 +2,8 @@ package com.altamirobruno.myapplication.data
 
 import co.tiagoaguiar.tutorial.jokerappdev.data.HTTPClient
 import com.altamirobruno.myapplication.model.Movie
+import com.altamirobruno.myapplication.model.Trailer
+import com.altamirobruno.myapplication.model.TrailerResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -63,6 +65,25 @@ class MovieRemoteDataSource {
             } catch (e: Exception) {
                 Result.failure(e)
             } as Result<Movie>
+
+        }
+
+    }
+
+    suspend fun getMovieTrailer(id: Int): Result<List<Trailer>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = HTTPClient.retrofit().create(TMDBApi::class.java).getMovieTrailer(id)
+                if (response.isSuccessful) {
+                    val trailer = response.body()?.results ?: emptyList()
+                    Result.success(trailer)
+                } else {
+                    val error = response.errorBody()?.string() ?: "Erro desconhecido"
+                    Result.failure(Exception(error))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            } as Result<List<Trailer>>
 
         }
 

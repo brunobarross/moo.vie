@@ -43,7 +43,6 @@ class MovieAdapter(
             val posterUrl = "https://image.tmdb.org/t/p/original/${movie.poster_path}"
             movieTitle.text = movie.title
 
-
             Glide
                 .with(fragment)
                 .load(movie.poster_path)

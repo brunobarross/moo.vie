@@ -38,6 +38,29 @@ class MoviePresenter(
 
     }
 
+    fun loadingTrailer(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val trailer = dataSource.getMovieTrailer(id).getOrNull()
+                withContext(Dispatchers.Main) {
+                    if (trailer !== null) {
+                        Log.d("trailer", trailer.toString())
+
+                    }
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    e.message?.let { Log.d("Erro", it.toString()) }
+                }
+            }
+
+        }
+
+
+    }
+
+
     fun inserCoverMovies(movie: Movie): Movie {
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         return movie.copy(poster_path = "$posterUrl${movie.backdrop_path}")

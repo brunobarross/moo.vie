@@ -11,6 +11,7 @@ object HTTPClient {
     const val BEARER_TOKEN =
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjNjODkyMjBiOTkzN2M1OWUwNjI5MTkxYmJhOWZhYSIsIm5iZiI6MTY0MTM5Mjc0Ny4wODgsInN1YiI6IjYxZDVhYTZiNTJkYzdmMDBhNGY5N2FmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.L8VhzLhSH8x_L6ORZyP8vpjik9symAuGtnOotHQ7VQI"
     const val API_KEY = "b23c89220b9937c59e0629191bba9faa"
+    const val API_LANGUAGE = "pt-BR"
 
     private fun httpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
