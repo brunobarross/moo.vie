@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.altamirobruno.myapplication.R
 import com.altamirobruno.myapplication.databinding.FragmentHomeBinding
 import com.altamirobruno.myapplication.databinding.FragmentMovieBinding
 import com.altamirobruno.myapplication.model.Movie
+import com.altamirobruno.myapplication.model.Trailer
 import com.altamirobruno.myapplication.presentantion.MoviePresenter
 import com.bumptech.glide.Glide
 
@@ -43,42 +45,59 @@ class MovieFragment : Fragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id: Int = arguments?.getInt("id") ?: 0
+        val playBtn = _binding?.iconPlay
         presenter.loadingMovie(id)
         presenter.loadingTrailer(id)
+        
 
+
+    }
+
+    fun hideCover() {
+        val movieCover: ImageView? = binding.movieImage
+        if (movieCover != null) {
+            movieCover.visibility = View.GONE
+        }
     }
 
     fun showMovieDetail(movie: Movie) {
-//        val movieCover: ImageView? = binding.movieImage
+        val movieCover: ImageView? = binding.movieImage
         val movieTitle = binding.movieDetailTitle
         val movieDescrition = binding.movieDetailDescription
-        val movieVideo = binding.movieVideo
-//        if (movieCover != null) {
-//
-//            Glide
-//                .with(this)
-//                .load(movie.poster_path)
-//                .centerCrop()
-//                .placeholder(R.drawable.movie_cover_placeholder)
-//                .into(movieCover)
-//        };
-        val uriParsed = Uri.parse("https://www.youtube.com/watch?v=j1zcmX1XEg4")
-        movieVideo.setVideoURI(uriParsed)
+
+        if (movieCover != null) {
+            Glide.with(this)
+                .load(movie.poster_path)
+                .centerCrop()
+                .placeholder(R.drawable.movie_cover_placeholder)
+                .into(movieCover)
+        }
         movieTitle.text = movie.title
         movieDescrition.text = movie.overview
-
-
     }
+
+    fun showTrailer(trailer: Trailer) {
+        val movieVideo = binding.movieVideo
+        val webView = binding.movieVideo
+        val video: String =
+            "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${trailer.key}?si=elgeGCV__j_4PBTT&amp;controls=0;autoplay=\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+        webView.loadData(video, "text/html", "utf-8")
+        webView.settings.javaScriptEnabled = true
+        webView.webChromeClient = WebChromeClient()
+        hideCover()
+    }
+
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
     }
 
     override fun onPause() {
         super.onPause()
-        (activity as? AppCompatActivity)?.supportActionBar?.show()
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(true)
     }
 
 

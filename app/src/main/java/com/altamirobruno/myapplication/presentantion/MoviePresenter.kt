@@ -3,6 +3,7 @@ package com.altamirobruno.myapplication.presentantion
 import android.util.Log
 import com.altamirobruno.myapplication.data.MovieRemoteDataSource
 import com.altamirobruno.myapplication.model.Movie
+import com.altamirobruno.myapplication.model.Trailer
 import com.altamirobruno.myapplication.view.MovieFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,8 +14,8 @@ import kotlinx.coroutines.withContext
 class MoviePresenter(
     private val view: MovieFragment,
     private val dataSource: MovieRemoteDataSource = MovieRemoteDataSource(),
-) {
 
+    ) {
     fun loadingMovie(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {

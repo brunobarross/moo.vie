@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
 
     fun showMovies() {
         adapter.notifyDataSetChanged()
-        Log.d("chegou", presenter.categories.toString())
+        
 
     }
 

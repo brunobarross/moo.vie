@@ -13,20 +13,33 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/movie_image"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            app:layout_constraintDimensionRatio="16:9"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-        <VideoView
-            android:id="@+id/movie_video"
+        <ImageView
+            android:id="@+id/movie_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/icon_play"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/baseline_play_circle_outline_24"
+            app:layout_constraintBottom_toBottomOf="@id/movie_image"
+            app:layout_constraintEnd_toEndOf="@id/movie_image"
+            app:layout_constraintStart_toStartOf="@id/movie_image"
+            app:layout_constraintTop_toTopOf="@id/movie_image" />
+
+
+        <WebView
+            android:id="@+id/movie_video"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:visibility="gone"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +52,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_video"
+            app:layout_constraintTop_toBottomOf="@id/movie_image"
             tools:text="Title" />
 
         <TextView
