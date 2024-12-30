@@ -38,8 +38,8 @@
         <WebView
             android:id="@+id/movie_video"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:visibility="gone"
+            android:layout_height="0dp"
+            android:visibility="invisible"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintTop_toTopOf="parent" />
 

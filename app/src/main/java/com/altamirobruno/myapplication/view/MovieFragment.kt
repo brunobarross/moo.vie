@@ -1,18 +1,15 @@
 package com.altamirobruno.myapplication.view
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.altamirobruno.myapplication.R
-import com.altamirobruno.myapplication.contract.Presenter
-import com.altamirobruno.myapplication.databinding.FragmentHomeBinding
 import com.altamirobruno.myapplication.databinding.FragmentMovieBinding
 import com.altamirobruno.myapplication.model.Movie
 import com.altamirobruno.myapplication.model.Trailer
@@ -59,7 +56,7 @@ class MovieFragment : Fragment() {
     fun hideCover() {
         val movieCover: ImageView? = binding.movieImage
         if (movieCover != null) {
-            movieCover.visibility = View.GONE
+            movieCover.visibility = View.INVISIBLE
         }
     }
 
@@ -84,15 +81,17 @@ class MovieFragment : Fragment() {
         val movieVideo = binding.movieVideo
         val webView = binding.movieVideo
         val video: String =
-            "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${trailer.key}?si=elgeGCV__j_4PBTT&amp;controls=1;autoplay=1\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+            "<html><body style='margin:0;padding:0;'><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/${trailer.key}?si=elgeGCV__j_4PBTT&amp;controls=1;autoplay=1\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></body></html>"
         webView.loadData(video, "text/html", "utf-8")
         webView.settings.javaScriptEnabled = true
         webView.webChromeClient = WebChromeClient()
         movieVideo.visibility = View.VISIBLE
-
         hideCover()
     }
 
+    fun showErrorToast(error: String) {
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+    }
 
     override fun onResume() {
         super.onResume()

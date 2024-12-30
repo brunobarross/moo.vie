@@ -1,11 +1,9 @@
 package com.altamirobruno.myapplication.presentantion
 
-import android.util.Log
 import com.altamirobruno.myapplication.contract.Presenter
 import com.altamirobruno.myapplication.data.MovieRemoteDataSource
 import com.altamirobruno.myapplication.model.Movie
 import com.altamirobruno.myapplication.model.Trailer
-import com.altamirobruno.myapplication.model.TrailerResponse
 import com.altamirobruno.myapplication.view.MovieFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +33,7 @@ class MoviePresenter(
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    e.message?.let { Log.d("Erro", it.toString()) }
+                    e.message?.let { view.showErrorToast(it.toString()) }
                 }
             }
 
@@ -58,7 +56,7 @@ class MoviePresenter(
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    e.message?.let { Log.d("Erro", it.toString()) }
+                    e.message?.let { view.showErrorToast(it.toString()) }
                 }
             }
 
@@ -76,7 +74,6 @@ class MoviePresenter(
     }
 
     override fun onButtonClicked() {
-        Log.d("erro", "aqui")
         view.showTrailer(trailer)
     }
 

@@ -1,10 +1,10 @@
 package com.altamirobruno.myapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -53,8 +53,12 @@ class HomeFragment : Fragment() {
 
     fun showMovies() {
         adapter.notifyDataSetChanged()
-        
 
+
+    }
+
+    fun showErrorToast(error: String) {
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
 
 
