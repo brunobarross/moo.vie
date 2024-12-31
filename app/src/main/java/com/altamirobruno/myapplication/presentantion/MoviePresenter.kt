@@ -24,7 +24,7 @@ class MoviePresenter(
                 val movie = dataSource.getMovie(id).getOrNull()
                 withContext(Dispatchers.Main) {
                     if (movie !== null) {
-                        val movieWithCover = inserCoverMovies(movie)
+                        val movieWithCover = inserCoverMovie(movie)
                         view.showMovieDetail(movieWithCover)
 
                     }
@@ -48,9 +48,11 @@ class MoviePresenter(
                 val trailerResponse = dataSource.getMovieTrailer(id).getOrNull()
                 withContext(Dispatchers.Main) {
                     if (trailerResponse !== null) {
+                        if (trailerResponse.isEmpty()) {
+                            view.hidePlayButton()
+                            return@withContext
+                        }
                         trailer = trailerResponse[0]
-
-
                     }
                 }
 
@@ -66,7 +68,7 @@ class MoviePresenter(
     }
 
 
-    fun inserCoverMovies(movie: Movie): Movie {
+    fun inserCoverMovie(movie: Movie): Movie {
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         return movie.copy(poster_path = "$posterUrl${movie.backdrop_path}")
 

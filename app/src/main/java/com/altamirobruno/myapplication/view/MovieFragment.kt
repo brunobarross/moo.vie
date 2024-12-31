@@ -21,6 +21,7 @@ class MovieFragment : Fragment() {
     private lateinit var presenter: MoviePresenter
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
+    private var playBtn: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +43,10 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val playBtn = _binding?.iconPlay
         val id: Int = arguments?.getInt("id") ?: 0
         presenter.loadingMovie(id)
         presenter.loadingTrailer(id)
+        playBtn = _binding?.iconPlay
         playBtn?.setOnClickListener {
             presenter.onButtonClicked()
         }
@@ -54,10 +55,14 @@ class MovieFragment : Fragment() {
     }
 
     fun hideCover() {
-        val movieCover: ImageView? = binding.movieImage
+        val movieCover: ImageView = binding.movieImage
         if (movieCover != null) {
             movieCover.visibility = View.INVISIBLE
         }
+    }
+
+    fun hidePlayButton() {
+        playBtn?.visibility = View.GONE
     }
 
 
@@ -92,6 +97,7 @@ class MovieFragment : Fragment() {
     fun showErrorToast(error: String) {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
+
 
     override fun onResume() {
         super.onResume()
