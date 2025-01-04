@@ -41,7 +41,10 @@ class MovieAdapter(
             val movieTitle: TextView = itemView.findViewById(R.id.movie_title)
             val movieCover: ImageView = itemView.findViewById(R.id.movie_cover)
             val posterUrl = "https://image.tmdb.org/t/p/original/${movie.poster_path}"
+            val movie_average: TextView = itemView.findViewById(R.id.movie_rating)
             movieTitle.text = movie.title
+            val format = R.string.decimal_format
+            movie_average.text = fragment.getString(format, movie.vote_average).replace(',', '.')
 
             Glide
                 .with(fragment)

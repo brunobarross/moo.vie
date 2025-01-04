@@ -21,8 +21,9 @@ class HomePresenter(
             try {
                 val moviesPopular = dataSource.getMovies("movie/popular").getOrNull()
                 val moviesTopRated = dataSource.getMovies("movie/top_rated").getOrNull()
+                val moviesUpcoming = dataSource.getMovies("movie/upcoming").getOrNull()
                 withContext(Dispatchers.Main) {
-                    if (!moviesPopular.isNullOrEmpty()) {
+                    if (!moviesPopular.isNullOrEmpty())
                         categories.add(
                             Category(
                                 id = 1,
@@ -30,20 +31,21 @@ class HomePresenter(
                                 movies = inserCoverMovies(moviesPopular)
                             )
                         )
-
-                    }
-                    if (!moviesTopRated.isNullOrEmpty()) {
-                        categories.add(
-                            Category(
-                                id = 2,
-                                name = "Mais bem avaliados",
-                                movies = inserCoverMovies(moviesTopRated)
-                            )
+                    if (!moviesTopRated.isNullOrEmpty()) categories.add(
+                        Category(
+                            id = 2,
+                            name = "Mais bem avaliados",
+                            movies = inserCoverMovies(moviesTopRated)
                         )
-
-                    }
+                    )
+                    if (!moviesUpcoming.isNullOrEmpty()) categories.add(
+                        Category(
+                            id = 3,
+                            name = "Em breve",
+                            movies = inserCoverMovies(moviesUpcoming)
+                        )
+                    )
                     view.showMovies()
-                    println("RODOU")
 
 
                 }
@@ -60,6 +62,9 @@ class HomePresenter(
 
     }
 
+    fun addMovieToArrayIndex() {
+
+    }
     fun inserCoverMovies(moviesList: List<Movie>): List<Movie> {
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         return moviesList.map { movie -> movie.copy(poster_path = "$posterUrl${movie.poster_path}") }
