@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Moo.vie</string>
-    <string name="menu_title_1">Filmes</string>
+    <string name="menu_title_1">Inicio</string>
     <string name="title_toolbar">Toolbar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_home">Home</string>
-    <string name="menu_title_2">Sobre</string>
+    <string name="menu_title_2">Buscar</string>
     <string name="decimal_format">%.1f</string>
 </resources>

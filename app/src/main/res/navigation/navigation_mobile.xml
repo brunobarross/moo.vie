@@ -13,20 +13,22 @@
         >
         <action
             android:id="@+id/action_nav_home_to_nav_movie"
-            app:destination="@id/nav_movie" />
+            app:destination="@id/nav_movie"
+            app:popUpTo="@id/nav_home"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
     </fragment>
     <fragment
-        android:id="@+id/nav_about"
-        android:name="com.altamirobruno.myapplication.AboutFragment"
+        android:id="@+id/nav_search"
+        android:name="com.altamirobruno.myapplication.view.MovieSearchFragment"
         android:label="@string/menu_title_2"
-        tools:layout="@layout/fragment_about"
+        tools:layout="@layout/fragment_movie_search"
 
         />
 
     <fragment
         android:id="@+id/nav_movie"
         android:name="com.altamirobruno.myapplication.view.MovieFragment"
-
         tools:layout="@layout/fragment_movie"
 
         />

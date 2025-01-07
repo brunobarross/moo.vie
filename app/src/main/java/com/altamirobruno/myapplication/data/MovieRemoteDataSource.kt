@@ -8,10 +8,11 @@ import kotlinx.coroutines.withContext
 
 class MovieRemoteDataSource {
 
-    suspend fun getMovies(url: String): Result<List<Movie>> {
+    suspend fun getMovies(url: String, query: String? = null): Result<List<Movie>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = HTTPClient.retrofit().create(TMDBApi::class.java).getMovies(url)
+                val response =
+                    HTTPClient.retrofit().create(TMDBApi::class.java).getMovies(url, query)
                 if (response.isSuccessful) {
                     val movies = response.body()?.results ?: emptyList()
                     Result.success(movies)

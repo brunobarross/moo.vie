@@ -28,6 +28,7 @@ class MovieFragment : Fragment() {
         presenter = MoviePresenter(this)
 
 
+
     }
 
     override fun onCreateView(
@@ -102,6 +103,8 @@ class MovieFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowHomeEnabled(true)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
     }
