@@ -60,7 +60,7 @@ class HomePresenter(
                 withContext(Dispatchers.Main) {
                     view.hideProgress()
                 }
-f
+
             }
 
         }
