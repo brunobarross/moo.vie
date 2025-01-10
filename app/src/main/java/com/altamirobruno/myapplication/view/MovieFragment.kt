@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,9 +20,11 @@ import com.bumptech.glide.Glide
 
 class MovieFragment : Fragment() {
     private lateinit var presenter: MoviePresenter
+    private lateinit var progressBar: ProgressBar
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
     private var playBtn: ImageView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,7 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar = view.findViewById(R.id.progress_item)
         val id: Int = arguments?.getInt("id") ?: 0
         presenter.loadingMovie(id)
         presenter.loadingTrailer(id)
@@ -98,6 +102,16 @@ class MovieFragment : Fragment() {
     fun showErrorToast(error: String) {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
     }
+
+    fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgress() {
+        progressBar.visibility = View.GONE
+    }
+
+
 
 
     override fun onResume() {

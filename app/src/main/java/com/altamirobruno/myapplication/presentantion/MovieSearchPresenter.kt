@@ -16,15 +16,18 @@ class MovieSearchPresenter(
 
     var movies = mutableListOf<Movie>()
 
-    fun loadingMovies() {
+    fun loadingMovies(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val moviesSearch = dataSource.getMovies("search/movie", "Jack+Reacher").getOrNull()
-
+                resetMovies()
+                val moviesSearch = dataSource.getMovies("search/movie", query).getOrNull()
                 withContext(Dispatchers.Main) {
+                    view.showProgress()
                     if (!moviesSearch.isNullOrEmpty()) {
                         movies.addAll(inserCoverMovies(moviesSearch))
                         view.showMovies()
+                    } else {
+                        view.showNotFoundText(query)
                     }
                 }
             } catch (e: Exception) {
@@ -32,6 +35,11 @@ class MovieSearchPresenter(
                     e.message?.let { view.showErrorToast(it.toString()) }
 
                 }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    view.hideProgress()
+                }
+
             }
 
         }
@@ -44,6 +52,12 @@ class MovieSearchPresenter(
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         return moviesList.map { movie -> movie.copy(poster_path = "$posterUrl${movie.poster_path}") }
 
+    }
+
+    fun resetMovies() {
+        if (movies.isNotEmpty()) {
+            movies.clear()
+        }
     }
 
 

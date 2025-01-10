@@ -16,5 +16,7 @@
 
         />
 
+    <include layout="@layout/progress_item" />
+
 
 </FrameLayout>

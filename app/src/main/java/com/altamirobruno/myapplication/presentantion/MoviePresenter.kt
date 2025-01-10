@@ -23,6 +23,7 @@ class MoviePresenter(
             try {
                 val movie = dataSource.getMovie(id).getOrNull()
                 withContext(Dispatchers.Main) {
+                    view.showProgress()
                     if (movie !== null) {
                         val movieWithCover = inserCoverMovie(movie)
                         view.showMovieDetail(movieWithCover)
@@ -35,6 +36,11 @@ class MoviePresenter(
                 withContext(Dispatchers.Main) {
                     e.message?.let { view.showErrorToast(it.toString()) }
                 }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    view.hideProgress()
+                }
+
             }
 
         }

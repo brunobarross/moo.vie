@@ -19,6 +19,7 @@ class HomePresenter(
     fun loadingCategories() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                view.showProgress()
                 val moviesPopular = dataSource.getMovies("movie/popular").getOrNull()
                 val moviesTopRated = dataSource.getMovies("movie/top_rated").getOrNull()
                 val moviesUpcoming = dataSource.getMovies("movie/upcoming").getOrNull()
@@ -55,6 +56,11 @@ class HomePresenter(
                     e.message?.let { view.showErrorToast(it.toString()) }
 
                 }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    view.hideProgress()
+                }
+f
             }
 
         }
@@ -62,9 +68,7 @@ class HomePresenter(
 
     }
 
-    fun addMovieToArrayIndex() {
 
-    }
     fun inserCoverMovies(moviesList: List<Movie>): List<Movie> {
         val posterUrl = "https://image.tmdb.org/t/p/original/"
         return moviesList.map { movie -> movie.copy(poster_path = "$posterUrl${movie.poster_path}") }

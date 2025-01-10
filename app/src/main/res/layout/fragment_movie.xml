@@ -69,5 +69,6 @@
             tools:text="Description adsasdasdasdasda asd asd asd asdasdasd asdasd " />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <include layout="@layout/progress_item" />
 
 </FrameLayout>
